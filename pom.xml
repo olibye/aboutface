@@ -28,7 +28,7 @@
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					<wtpversion>1.5</wtpversion>
+					<wtpversion>1.6</wtpversion>
 				</configuration>
 			</plugin>
 
