@@ -65,8 +65,9 @@ public class TableBean implements Externalizable {
         if (model == null) {
             // I've been build from view state
             // look up each result by key
+            model = new ArrayList<Row>(keys.size());
             for (String key : keys) {
-                getDao().getResult(key);
+                model.add(getDao().getResult(key));
             }
         }
 
@@ -92,10 +93,6 @@ public class TableBean implements Externalizable {
         return dao;
     }
 
-    public void setDao(TableDAO dao) {
-        LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
-        this.dao = dao;
-    }
 
     public void writeExternal(ObjectOutput out) throws IOException {
         LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
