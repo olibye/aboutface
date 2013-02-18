@@ -1,4 +1,6 @@
-package com.positiverobot.prime;
+package com.positiverobot.aboutface;
+
+import com.positiverobot.aboutface.App;
 
 import junit.framework.TestCase;
 

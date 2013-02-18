@@ -4,10 +4,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.positiverobot</groupId>
-	<artifactId>primefactor</artifactId>
+	<artifactId>aboutface</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Prime Factor</name>
+	<name>About Face</name>
 
 	<repositories>
 		<repository>
