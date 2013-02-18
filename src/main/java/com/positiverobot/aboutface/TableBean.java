@@ -5,12 +5,10 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -31,7 +29,8 @@ public class TableBean implements Externalizable {
     private transient List<String> keys;
 
     // I want a new one each time so don't serialise it
-    @ManagedProperty(value = "#{tableDAO}")
+    // can't used managed property as we can't inject @RequestScoped into
+    // @ViewScoped beans
     private transient TableDAO dao;
 
     /**
@@ -48,38 +47,29 @@ public class TableBean implements Externalizable {
     public void postConstruct() {
         LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
 
-        model = new ArrayList<Row>(10);
-        keys = new ArrayList<String>(10);
-        
-        add(new Row("a", "Row 1"));
-        add(new Row("b", "Row 2"));
-        add(new Row("c", "Row 3"));
-        add(new Row("d", "Row 4"));
-        add(new Row("e", "Row 5"));
-        add(new Row("f", "Row 6"));
-        add(new Row("g", "Row 7"));
-        add(new Row("h", "Row 8"));
-        add(new Row("i", "Row 9"));
-        add(new Row("j", "Row 10"));
+        setModel(getDao().getResults());
     }
 
-    private void add(Row row) {
-        keys.add("key" + row.getKey());
-        model.add(row);
+    private void setModel(List<Row> model) {
+        this.model = model;
+        keys = new ArrayList<String>(model.size());
+
+        for (Row row : model) {
+            keys.add(row.getKey());
+        }
     }
 
     public List<Row> getModel() {
         LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
-        
-        if(model == null) {
+
+        if (model == null) {
             // I've been build from view state
-            model = new ArrayList<Row>();
-            
+            // look up each result by key
             for (String key : keys) {
-                model.add(new Row(key, ""));
+                getDao().getResult(key);
             }
         }
-        
+
         return model;
     }
 
@@ -92,7 +82,13 @@ public class TableBean implements Externalizable {
     }
 
     public TableDAO getDao() {
-        LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
+        FacesContext currentInstance = FacesContext.getCurrentInstance();
+        LOG.info("In Phase:{}", currentInstance.getCurrentPhaseId());
+
+        if (dao == null) {
+            dao = (TableDAO) currentInstance.getApplication().evaluateExpressionGet(currentInstance, "#{tableDAO}", TableDAO.class);
+        }
+
         return dao;
     }
 
@@ -109,8 +105,5 @@ public class TableBean implements Externalizable {
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
         keys = (List<String>) in.readObject();
-        
-        // to check what happens if the result is in a different order
-        Collections.shuffle(keys);
     }
 }
