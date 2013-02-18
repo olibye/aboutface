@@ -21,10 +21,10 @@
 				<p:column headerText="Model" style="width:30%">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{row}" />
+							<h:outputText value="#{row.value}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:inputText value="#{row}" />
+							<p:inputText value="#{row.value}" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
@@ -34,7 +34,7 @@
 				</p:column>
 			</p:dataTable>
 
-			<ui:debug key='d' />
+			<ui:debug key='x' />
 
 		</h:form>
 	</f:view>
