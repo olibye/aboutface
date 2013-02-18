@@ -24,16 +24,20 @@
 							<h:outputText value="#{row}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:inputText value="#{row}"/>
+							<p:inputText value="#{row}" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
+
+				<p:column>
+					<p:rowEditor />
+				</p:column>
 			</p:dataTable>
-			
+
 			<ui:debug key='d' />
-			
+
 		</h:form>
 	</f:view>
 </h:body>
-<ft:trace />
+
 </html>
