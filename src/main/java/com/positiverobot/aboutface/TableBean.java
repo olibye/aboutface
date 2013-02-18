@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -20,43 +21,13 @@ public class TableBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOG = LoggerFactory.getLogger(TableBean.class);
+    static final Logger LOG = LoggerFactory.getLogger(TableBean.class);
     
     private List<Row> model = new ArrayList<Row>(10);
     
-    /**
-     * Row bean also needs to be serializable
-     */
-    public class Row implements Serializable {
-        
-        private static final long serialVersionUID = 1L;
-        String key;
-        String value;
-
-        public Row(String key, String value) {
-            super();
-            this.key = key;
-            this.value = value;
-        }
-
-        public String getValue() {
-            LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
-            return value;
-        }
-
-        public void setValue(String value) {
-            LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
-            this.value = value;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-    }
+    // I want a new one each time so don't serialise it
+    @ManagedProperty(value="#{tableDAO}")
+    private transient TableDAO dao;
 
     public TableBean() {
         LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
@@ -88,5 +59,15 @@ public class TableBean implements Serializable {
 
     public void onCancel(RowEditEvent event) {
         LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
+    }
+
+    public TableDAO getDao() {
+        LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
+        return dao;
+    }
+
+    public void setDao(TableDAO dao) {
+        LOG.info("In Phase:{}", FacesContext.getCurrentInstance().getCurrentPhaseId());
+        this.dao = dao;
     }
 }
