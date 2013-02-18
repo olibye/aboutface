@@ -1,43 +1,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:ft="http://facestrace.sourceforge.net"
-	xmlns:p="http://primefaces.org/ui">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:ft="http://facestrace.sourceforge.net"
+    xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 
 </h:head>
 
 <h:body>
-	<f:view>
-		<h:form>
-			<p:dataTable var="row" value="#{tableBean.model}" id="rowList"
-				editable="true">
+    <f:view>
+        <h:form>
+            <p:dataTable var="row" value="#{tableBean.model}"
+                id="rowList" editable="true" rowKey="row.key">
 
-				<p:ajax event="rowEdit" listener="#{tableBean.onEdit}" />
-				<p:ajax event="rowEditCancel" listener="#{tableBean.onCancel}" />
+                <p:ajax event="rowEdit" listener="#{tableBean.onEdit}" />
+                <p:ajax event="rowEditCancel"
+                    listener="#{tableBean.onCancel}" />
 
-				<p:column headerText="Model" style="width:30%">
-					<p:cellEditor>
-						<f:facet name="output">
-							<h:outputText value="#{row.value}" />
-						</f:facet>
-						<f:facet name="input">
-							<p:inputText value="#{row.value}" />
-						</f:facet>
-					</p:cellEditor>
-				</p:column>
+                <p:column headerText="Model" style="width:30%">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{row.value}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{row.value}" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
 
-				<p:column>
-					<p:rowEditor />
-				</p:column>
-			</p:dataTable>
+                <p:column>
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
 
-			<ui:debug key='x' />
-
-		</h:form>
-	</f:view>
+        </h:form>
+        <ui:debug hotkey="x" />
+    </f:view>
 </h:body>
 
 </html>
