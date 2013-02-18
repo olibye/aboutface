@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ft="http://facestrace.sourceforge.net"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<f:view>
+		<h:form>
+			<p:dataTable var="row" value="#{tableBean.model}" id="rowList"
+				editable="true">
+
+				<p:ajax event="rowEdit" listener="#{tableBean.onEdit}" />
+				<p:ajax event="rowEditCancel" listener="#{tableBean.onCancel}" />
+
+				<p:column headerText="Model" style="width:30%">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{row}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{row}"/>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+			</p:dataTable>
+			
+			<ui:debug key='d' />
+			
+		</h:form>
+	</f:view>
+</h:body>
+<ft:trace />
+</html>
