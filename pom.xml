@@ -77,6 +77,32 @@
 
 	<dependencies>
 
+		<!-- JSF dependencies 
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1.6</version>
+		</dependency>-->
+<dependency>
+    <!-- from myfaces -->
+    	<groupId>commons-collections</groupId>
+	<artifactId>commons-collections</artifactId>
+	<version>3.2.1</version>
+</dependency>
+            
+<dependency>
+    <!-- from myfaces -->
+    	<groupId>commons-digester</groupId>
+	<artifactId>commons-digester</artifactId>
+	<version>2.1</version>
+</dependency>
+            
+		<dependency>
+			<groupId>org.apache.myfaces.core</groupId>
+			<artifactId>myfaces-bundle</artifactId>
+			<version>2.1.10</version>
+		</dependency>
+	    
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
