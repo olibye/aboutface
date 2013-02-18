@@ -13,8 +13,7 @@
     <f:view>
         <h:form>
             <p:dataTable var="row" value="#{tableBean.model}"
-                id="rowList" editable="true" rowKey="#{row.key}"
-                rowStatePreserved="true">
+                id="rowList" editable="true">
 
                 <p:ajax event="rowEdit" listener="#{tableBean.onEdit}" />
                 <p:ajax event="rowEditCancel"

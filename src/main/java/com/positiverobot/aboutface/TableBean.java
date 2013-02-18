@@ -13,11 +13,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.ListDataModel;
 
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.model.SelectableDataModel;
-import org.primefaces.model.SelectableDataModelWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
